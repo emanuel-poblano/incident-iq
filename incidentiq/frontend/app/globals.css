@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f7f8fa;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --accent: #2563eb;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.dark {
+  --background: #0b0f17;
+  --foreground: #e2e8f0;
+  --surface: #111827;
+  --border: #1f2937;
+  --accent: #3b82f6;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

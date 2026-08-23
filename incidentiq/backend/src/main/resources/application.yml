@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: incidentiq-backend
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/incidentiq}
+    username: ${DATABASE_USERNAME:incidentiq}
+    password: ${DATABASE_PASSWORD:incidentiq}
+
+  jpa:
+    hibernate:
+      # Schema is owned by Flyway migrations, not Hibernate.
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: ${SERVER_PORT:8080}
+
+incidentiq:
+  ai:
+    provider: ${AI_PROVIDER:anthropic}
+    api-key: ${AI_API_KEY:}
+    model: ${AI_MODEL:claude-sonnet-4-6}
+  cors:
+    allowed-origins: ${NEXT_PUBLIC_API_URL:http://localhost:3000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    com.incidentiq: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{requestId}] %-5level %logger{36} - %msg%n"

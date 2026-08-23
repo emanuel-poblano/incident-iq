@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:incidentiq;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  flyway:
+    enabled: false
+
+incidentiq:
+  ai:
+    provider: mock
+    api-key: test-key-not-real
+    model: mock-model
+  cors:
+    allowed-origins: http://localhost:3000
