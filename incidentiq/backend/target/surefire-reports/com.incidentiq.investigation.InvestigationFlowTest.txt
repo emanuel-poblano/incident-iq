@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.incidentiq.investigation.InvestigationFlowTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.529 s -- in com.incidentiq.investigation.InvestigationFlowTest

@@ -28,6 +28,12 @@ public class GlobalExceptionHandler {
                 .body(ApiError.of(404, "NOT_FOUND", ex.getMessage(), request.getRequestURI()));
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiError> handleBadRequest(BadRequestException ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiError.of(400, "BAD_REQUEST", ex.getMessage(), request.getRequestURI()));
+    }
+
     @ExceptionHandler(AIInvestigationException.class)
     public ResponseEntity<ApiError> handleAiFailure(AIInvestigationException ex, HttpServletRequest request) {
         log.error("AI investigation failure", ex);

@@ -1,0 +1,8 @@
+2026-03-02T10:14:50Z INFO [order-service] Handling GET /orders/8812
+2026-03-02T10:15:01Z WARN [HikariPool-1] Connection pool utilisation 95% (active=19 idle=1 waiting=4)
+2026-03-02T10:15:10Z ERROR [HikariPool-1] HikariPool-1 - Connection is not available, request timed out after 30000ms (active=20 idle=0 waiting=37)
+2026-03-02T10:15:10Z ERROR [order-service] Failed to load order 8812: Unable to acquire JDBC Connection
+2026-03-02T10:15:22Z ERROR [HikariPool-1] HikariPool-1 - Connection is not available, request timed out after 30000ms (active=20 idle=0 waiting=52)
+2026-03-02T10:15:40Z WARN [order-service] Slow query detected: SELECT * FROM orders WHERE customer_id=? took 28412ms
+2026-03-02T10:16:05Z ERROR [order-service] Request failed with status 503: Unable to acquire JDBC Connection
+2026-03-02T10:16:30Z INFO [health] Readiness probe failing for order-service

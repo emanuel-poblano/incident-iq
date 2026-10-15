@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.incidentiq.IncidentIqApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.445 s -- in com.incidentiq.IncidentIqApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.935 s -- in com.incidentiq.IncidentIqApplicationTests

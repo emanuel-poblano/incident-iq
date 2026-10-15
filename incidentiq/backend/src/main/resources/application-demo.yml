@@ -1,0 +1,17 @@
+# Zero-dependency demo: in-memory H2, sample incidents seeded. Run with
+#   mvn spring-boot:run -Dspring-boot.run.profiles=demo
+spring:
+  datasource:
+    url: jdbc:h2:mem:incidentiq-demo;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+
+incidentiq:
+  seed:
+    enabled: true

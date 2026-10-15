@@ -17,4 +17,7 @@ package com.incidentiq.ai;
 public interface AIInvestigationService {
 
     AIInvestigationResponse investigate(AIInvestigationRequest request);
+
+    /** Identifier stored with each saved report so its origin is auditable. */
+    String providerName();
 }

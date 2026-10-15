@@ -1,0 +1,8 @@
+2026-03-08T02:00:00Z INFO [report-service] JVM started, max heap 2048MB
+2026-03-08T06:00:00Z INFO [report-service] Heap usage 41%
+2026-03-08T12:00:00Z WARN [report-service] Heap usage at 78% after full GC
+2026-03-08T18:30:00Z WARN [report-service] Heap usage at 93% after full GC; GC pauses 4.2s
+2026-03-08T19:10:15Z ERROR [report-service] java.lang.OutOfMemoryError: Java heap space
+2026-03-08T19:10:15Z ERROR [report-service] Uncaught exception in thread report-cache-refresher
+2026-03-08T19:10:20Z ERROR [kubelet] Container report-service terminated: OOMKilled (exit code 137)
+2026-03-08T19:10:45Z INFO [kubelet] Restarting container report-service (restart count 7)

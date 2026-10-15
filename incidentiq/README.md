@@ -17,6 +17,22 @@ skeleton, and Docker Compose wiring are in place. Business logic (Incident
 CRUD, AI investigation, results UI, seed data, tests) is implemented in the
 phases that follow — see [Roadmap](#roadmap).
 
+## Quick demo (no Docker, no API key)
+
+```bash
+cd backend
+mvn spring-boot:run -Dspring-boot.run.profiles=demo   # H2 in-memory, 5 sample incidents seeded
+# in another terminal:
+scripts/demo.sh   # create incident -> ingest logs -> investigate -> saved report
+```
+
+The investigation flow: `POST /api/incidents` -> `POST /api/incidents/{id}/logs`
+-> `POST /api/incidents/{id}/investigate` -> `GET /api/investigations/{id}`.
+Analysis is done by a deterministic `RuleBasedInvestigationService` that cites
+the exact log lines behind its conclusion (validated against the ingested logs
+before saving) and reports 0 confidence when nothing matches. Run tests with
+`mvn test` (Java 21).
+
 ## Problem being solved
 
 When an incident happens, engineers spend a large share of their time just
@@ -122,11 +138,11 @@ GET    /api/investigations/{id}
 GET    /actuator/health
 ```
 
-*(Incident/Investigation endpoints are implemented in Phase 3 and Phase 6.)*
+`POST /api/incidents/{id}/logs` appends pasted logs to an incident.
 
 ## Demo scenarios
 
-Once seed data is implemented (Phase 9), the app ships with 5 realistic
+The app ships (set `SEED_SAMPLE_DATA=true`, default in Docker Compose) with 5 realistic
 incidents out of the box: database connection pool exhaustion, external
 payment API timeout, memory leak crash, bad-deployment HTTP 500s, and an
 expired TLS certificate — each with logs and an expected probable root cause,

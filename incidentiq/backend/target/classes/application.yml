@@ -28,6 +28,8 @@ incidentiq:
     provider: ${AI_PROVIDER:anthropic}
     api-key: ${AI_API_KEY:}
     model: ${AI_MODEL:claude-sonnet-4-6}
+  seed:
+    enabled: ${SEED_SAMPLE_DATA:false}
   cors:
     allowed-origins: ${NEXT_PUBLIC_API_URL:http://localhost:3000}
 
