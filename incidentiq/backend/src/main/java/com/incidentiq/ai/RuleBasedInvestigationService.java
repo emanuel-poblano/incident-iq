@@ -49,7 +49,7 @@ public class RuleBasedInvestigationService implements AIInvestigationService {
                             "Restart affected instances to restore service while the leak is fixed",
                             "Add heap usage alerting and set explicit memory limits")),
             new Rule("tls", "Expired TLS certificate", 0.75,
-                    "certificate.*(expired|not valid)|CertificateExpiredException|PKIX path validation failed|notAfter",
+                    "certificate.*expired|CertificateExpiredException",
                     null,
                     "Shows TLS handshakes failing because a certificate is expired",
                     List.of("Renew and deploy the expired certificate immediately",
@@ -82,6 +82,10 @@ public class RuleBasedInvestigationService implements AIInvestigationService {
         Rule match = null;
         List<LogEvent> matchHits = List.of();
         for (Rule rule : RULES) {
+            if (rule.context() != null
+                    && events.stream().noneMatch(e -> rule.context().matcher(e.raw()).find())) {
+                continue;
+            }
             List<LogEvent> hits = events.stream()
                     .filter(e -> isProblem(e) && rule.signal().matcher(e.raw()).find()).toList();
             if (hits.size() > matchHits.size()) {

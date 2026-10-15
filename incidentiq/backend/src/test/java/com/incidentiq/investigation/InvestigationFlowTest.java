@@ -21,6 +21,9 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -99,6 +102,45 @@ class InvestigationFlowTest {
         call(get("/api/incidents/999999"), 404);
         postJson("/api/incidents/999999/investigate", Map.of(), 404);
         call(get("/api/investigations/999999"), 404);
+    }
+
+    @Test
+    void incidentTextFieldsAreLimitedToDatabaseColumnLength() throws Exception {
+        String maxLength = "x".repeat(255);
+        Map<String, Object> request = Map.of("title", maxLength, "service", maxLength,
+                "environment", maxLength, "severity", "LOW");
+        postJson("/api/incidents", request, 201);
+
+        for (String field : List.of("title", "service", "environment")) {
+            Map<String, Object> tooLong = new java.util.HashMap<>(request);
+            tooLong.put(field, maxLength + "x");
+            postJson("/api/incidents", tooLong, 400);
+        }
+    }
+
+    @Test
+    void concurrentLogAppendsRetainBothBatches() throws Exception {
+        JsonNode incident = postJson("/api/incidents", Map.of("title", "t", "service", "s", "environment", "e",
+                "severity", "LOW"), 201);
+        long id = incident.get("id").asLong();
+        var start = new CountDownLatch(1);
+        try (var executor = Executors.newFixedThreadPool(2)) {
+            var first = executor.submit(() -> {
+                start.await();
+                postJson("/api/incidents/" + id + "/logs", Map.of("logs", "first batch"), 200);
+                return null;
+            });
+            var second = executor.submit(() -> {
+                start.await();
+                postJson("/api/incidents/" + id + "/logs", Map.of("logs", "second batch"), 200);
+                return null;
+            });
+            start.countDown();
+            first.get(10, TimeUnit.SECONDS);
+            second.get(10, TimeUnit.SECONDS);
+        }
+        String logs = call(get("/api/incidents/" + id), 200).get("rawLogs").asText();
+        assertThat(logs).contains("first batch", "second batch");
     }
 
     @Test

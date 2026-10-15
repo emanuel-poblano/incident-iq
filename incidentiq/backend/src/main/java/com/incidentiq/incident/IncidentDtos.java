@@ -2,6 +2,7 @@ package com.incidentiq.incident;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 
@@ -11,10 +12,10 @@ public final class IncidentDtos {
     }
 
     public record IncidentRequest(
-            @NotBlank String title,
+            @NotBlank @Size(max = 255) String title,
             String description,
-            @NotBlank String service,
-            @NotBlank String environment,
+            @NotBlank @Size(max = 255) String service,
+            @NotBlank @Size(max = 255) String environment,
             @NotBlank @Pattern(regexp = "(?i)LOW|MEDIUM|HIGH|CRITICAL", message = "must be LOW, MEDIUM, HIGH or CRITICAL")
             String severity,
             String rawLogs

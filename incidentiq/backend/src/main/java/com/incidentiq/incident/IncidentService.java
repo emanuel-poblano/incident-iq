@@ -47,7 +47,8 @@ public class IncidentService {
     /** Log ingestion: appends pasted log text to the incident's evidence. */
     @Transactional
     public Incident appendLogs(Long id, String logs) {
-        Incident i = get(id);
+        Incident i = incidents.findByIdForUpdate(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Incident " + id + " not found"));
         String existing = i.getRawLogs();
         i.setRawLogs(existing == null || existing.isBlank() ? logs : existing.stripTrailing() + "\n" + logs);
         return i;
