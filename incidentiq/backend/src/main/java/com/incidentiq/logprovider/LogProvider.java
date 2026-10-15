@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface LogProvider {
 
-    record LogEvent(Instant timestamp, String level, String source, String message) {
+    record LogEvent(Instant timestamp, String level, String source, String message, String raw) {
     }
 
     List<LogEvent> search(Long incidentId);

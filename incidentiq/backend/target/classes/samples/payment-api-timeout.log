@@ -1,0 +1,8 @@
+2026-03-05T14:00:02Z INFO [checkout-service] POST /checkout started for cart 5521
+2026-03-05T14:00:07Z WARN [PaymentClient] Call to https://api.paygate.example/v1/charges is slow (5003ms)
+2026-03-05T14:00:12Z ERROR [PaymentClient] java.net.SocketTimeoutException: Read timed out calling paygate charges API
+2026-03-05T14:00:12Z ERROR [checkout-service] Payment failed for cart 5521: upstream timeout
+2026-03-05T14:01:44Z ERROR [PaymentClient] java.net.SocketTimeoutException: Read timed out calling paygate charges API
+2026-03-05T14:02:30Z WARN [PaymentClient] Retry 3/3 exhausted for paygate charges API
+2026-03-05T14:02:31Z ERROR [PaymentClient] Circuit breaker 'paygate' is now OPEN
+2026-03-05T14:05:00Z INFO [checkout-service] Database and cache latency normal

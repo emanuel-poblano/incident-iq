@@ -29,6 +29,7 @@ services:
       DATABASE_URL: jdbc:postgresql://postgres:5432/${DATABASE_NAME:-incidentiq}
       DATABASE_USERNAME: ${DATABASE_USERNAME:-incidentiq}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-incidentiq}
+      SEED_SAMPLE_DATA: ${SEED_SAMPLE_DATA:-true}
       AI_API_KEY: ${AI_API_KEY:-}
       AI_MODEL: ${AI_MODEL:-claude-sonnet-4-6}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}

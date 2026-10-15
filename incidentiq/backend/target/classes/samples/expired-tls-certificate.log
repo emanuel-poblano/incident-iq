@@ -1,0 +1,6 @@
+2026-03-12T00:00:03Z INFO [gateway] Proxying request to partner-api.example.com
+2026-03-12T00:00:04Z ERROR [gateway] javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.cert.CertPathValidatorException: validity check failed
+2026-03-12T00:00:04Z ERROR [gateway] Caused by: java.security.cert.CertificateExpiredException: NotAfter: Thu Mar 12 00:00:00 UTC 2026
+2026-03-12T00:00:09Z ERROR [gateway] TLS handshake failed: certificate for partner-api.example.com has expired
+2026-03-12T00:00:30Z ERROR [partner-sync] Sync job failed: SSLHandshakeException: certificate has expired
+2026-03-12T00:01:00Z WARN [partner-sync] 112 queued messages waiting for retry

@@ -1,0 +1,7 @@
+2026-03-10T09:00:00Z INFO [deploy-bot] Deployment of profile-service version 2.14.0 started
+2026-03-10T09:02:11Z INFO [deploy-bot] Rollout complete: profile-service version 2.14.0 live
+2026-03-10T09:02:40Z ERROR [profile-service] Unhandled exception in GET /profiles/42: java.lang.NullPointerException: Cannot invoke "Address.getCity()" because "address" is null
+2026-03-10T09:02:41Z ERROR [profile-service] Request GET /profiles/42 completed with status=500
+2026-03-10T09:03:05Z ERROR [profile-service] Unhandled exception in GET /profiles/77: java.lang.NullPointerException: Cannot invoke "Address.getCity()" because "address" is null
+2026-03-10T09:03:06Z ERROR [profile-service] Request GET /profiles/77 completed with status=500
+2026-03-10T09:05:00Z WARN [alerting] Error rate 38% for profile-service exceeds threshold 2%
